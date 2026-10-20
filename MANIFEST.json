@@ -1,0 +1,145 @@
+{
+  "package": "AI-Sales-Support-Codex-Handoff",
+  "prepared_on": "2026-10-20",
+  "purpose": "Context and execution instructions; not SaaS source or a deployment.",
+  "hash_algorithm": "sha256",
+  "manifest_excludes_itself": true,
+  "file_count_excluding_manifest": 27,
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 7964,
+      "sha256": "60469f66a64f0147857d99411425f2f1daf32b69cd81d9fe28185fbf1b1a55c8"
+    },
+    {
+      "path": "CODEX_RESUME.md",
+      "bytes": 1190,
+      "sha256": "5681f532704a14e60f7f9a463ff54d799f645ebba4c55245e42938cf77fb45ac"
+    },
+    {
+      "path": "CODEX_START.md",
+      "bytes": 6157,
+      "sha256": "5fb20955fa7d81fc5287558377136c0e54e5bccb226449612133b62b032915da"
+    },
+    {
+      "path": "PROGRESS.md",
+      "bytes": 1437,
+      "sha256": "a0044412ce7835d45f0a3dd1f3aff35994cf4345fcbfb749a5277c6ca4f22c07"
+    },
+    {
+      "path": "README-HANDOFF.md",
+      "bytes": 4915,
+      "sha256": "9117870d4218b8333404f844e77489ca85ab696a21b9af040ed928d8682cd8cb"
+    },
+    {
+      "path": "TASKS.json",
+      "bytes": 34531,
+      "sha256": "7a740ce491245e8cd67e7bc348621622ba8cfce22a956e129ee20195bf4f77ce"
+    },
+    {
+      "path": "docs/archive/OBSOLETE-handover-DO-NOT-RUN.zip",
+      "bytes": 2150,
+      "sha256": "22e6cccbab3dd8d86b6e1bdec288edd69137ab01c5b1dd12d6fbd00823998c3d"
+    },
+    {
+      "path": "docs/archive/README.md",
+      "bytes": 656,
+      "sha256": "184d0fac4f59351f316923e38b73e303766f2728327e0911efcce9bcb3c1ccb7"
+    },
+    {
+      "path": "docs/archive/combined-blueprint.md",
+      "bytes": 46723,
+      "sha256": "726ac0371017f9bd42143f44bd76b20fa5c6d615ecd80ae81fd74314febdab8b"
+    },
+    {
+      "path": "docs/archive/original-blueprint.zip",
+      "bytes": 23218,
+      "sha256": "d1d43f1ae2e73c94d3c4719aaa8ba1e34bf6c0235cf3dbffd0d052e7240a54c2"
+    },
+    {
+      "path": "docs/handoff/ACCESS_AND_APPROVALS.md",
+      "bytes": 3191,
+      "sha256": "15b3e57583a0da4bd62b2c64a54f395edd073c5f1a46b719e5e7e20254a6caf4"
+    },
+    {
+      "path": "docs/handoff/CURRENT_STATE.md",
+      "bytes": 2381,
+      "sha256": "53c156cde8454fa8c3e9bd3b46b6130702a39e63b80b730712d171ad9cc14681"
+    },
+    {
+      "path": "docs/handoff/DECISIONS.md",
+      "bytes": 3344,
+      "sha256": "da6df5a476c1d3420ab2c81fe723149bee69cc0a2bdbc6a7104edd76609b58cf"
+    },
+    {
+      "path": "docs/handoff/EVIDENCE_TEMPLATE.md",
+      "bytes": 1559,
+      "sha256": "5405283502020ce149bd163b895aaa51b4e6d46542366e48eb1a63c03d700a67"
+    },
+    {
+      "path": "docs/handoff/EXECUTION_PLAN.md",
+      "bytes": 8148,
+      "sha256": "b57fc58091278200061f73d98e954e0601deda8d803042cc5da0b0a135c2d832"
+    },
+    {
+      "path": "docs/handoff/OPENAI_SETUP_SOURCES.md",
+      "bytes": 1778,
+      "sha256": "8eafab32fae837bcd0d0f52ab2669de8e3b34e847410cd247c7250065facebdd"
+    },
+    {
+      "path": "docs/handoff/TRANSFER_RECORD.json",
+      "bytes": 1893,
+      "sha256": "c45c0c33e44708f74c5e7c50be9ac75a10a1c5280e357dd82baba297521fbac4"
+    },
+    {
+      "path": "docs/reference/original-agent-guidance.md",
+      "bytes": 4564,
+      "sha256": "eb2ee772ed36d1ca93705b4b8c7c6a8c43e560002cb930155e5b40d9dac55c86"
+    },
+    {
+      "path": "docs/reference/original-blueprint-introduction.md",
+      "bytes": 2750,
+      "sha256": "f5b1730d774299e687b2c639c3cc5edfe10f535e9a6d3c823f02bd86ed77d489"
+    },
+    {
+      "path": "docs/reference/verified-status-and-checklist.md",
+      "bytes": 26690,
+      "sha256": "4d7b927ba51b68657fa5f67d50b1574d11088c9afb89631bba1922736afb4440"
+    },
+    {
+      "path": "docs/specs/01-product-and-workflows.md",
+      "bytes": 5086,
+      "sha256": "a68f23df1e3549c0eff87cbbeefb62b39b971938a224219f09af91b63a73a566"
+    },
+    {
+      "path": "docs/specs/02-architecture-and-repository.md",
+      "bytes": 7230,
+      "sha256": "c52cf14461418c124d2b7fb8c120cbc6280d86d0e6a71ce2773c242d136e29b5"
+    },
+    {
+      "path": "docs/specs/03-security-and-ai-runtime.md",
+      "bytes": 6536,
+      "sha256": "42b6c437d9c85fcf4bcbf745c5b51982bec034f9bfbab101c28c9124998c3973"
+    },
+    {
+      "path": "docs/specs/04-delivery-and-acceptance.md",
+      "bytes": 5767,
+      "sha256": "3e6bee45e5fde8c6e279776ee8c85503de72322cc94969788565606bc733aa49"
+    },
+    {
+      "path": "docs/specs/05-deployment-and-maintenance.md",
+      "bytes": 4859,
+      "sha256": "f785aeb7db7ca40caa3d9377080168db211328465f6ab002ed8c509376fa57e5"
+    },
+    {
+      "path": "docs/specs/06-cost-model.md",
+      "bytes": 6602,
+      "sha256": "d9735faf792ccab116c7159c4cb20cd543b428ca740953ba3a22cf617f64d7c0"
+    },
+    {
+      "path": "docs/specs/07-sources.md",
+      "bytes": 3273,
+      "sha256": "e154dfef549b3f9fa4159c276cb4a4cd8be714fadc6282e900968f765e8660b5"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "prepared_on": "2026-10-20",
+  "kind": "documentation_and_execution_handoff",
+  "requested_windows_path": "C:\\Users\\nanaa\\Desktop\\Studies\\Self_Studies\\Codes\\Projects\\AI Sales & Customer Support SaaS",
+  "intended_github_remote": "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS.git",
+  "input_sources": [
+    {
+      "source_filename": "ai-sales-support-blueprint.zip",
+      "included_as": "docs/archive/original-blueprint.zip",
+      "bytes": 23218,
+      "sha256": "d1d43f1ae2e73c94d3c4719aaa8ba1e34bf6c0235cf3dbffd0d052e7240a54c2"
+    },
+    {
+      "source_filename": "AI_Sales_Support_Implementation_Blueprint.md",
+      "included_as": "docs/archive/combined-blueprint.md",
+      "bytes": 46723,
+      "sha256": "726ac0371017f9bd42143f44bd76b20fa5c6d615ecd80ae81fd74314febdab8b"
+    },
+    {
+      "source_filename": "AI_Sales_Support_Verified_Status_and_Checklist.md",
+      "included_as": "docs/reference/verified-status-and-checklist.md",
+      "bytes": 26690,
+      "sha256": "4d7b927ba51b68657fa5f67d50b1574d11088c9afb89631bba1922736afb4440"
+    },
+    {
+      "source_filename": "AI-Sales-Customer-Support-SaaS-handover.zip",
+      "included_as": "docs/archive/OBSOLETE-handover-DO-NOT-RUN.zip",
+      "bytes": 2150,
+      "sha256": "22e6cccbab3dd8d86b6e1bdec288edd69137ab01c5b1dd12d6fbd00823998c3d"
+    }
+  ],
+  "preserved_blueprint_documents": 9,
+  "acceptance_tasks": 44,
+  "application_source_included": false,
+  "windows_copy_performed": false,
+  "codex_task_started": false,
+  "github_write_performed": false,
+  "application_tests_run": false,
+  "production_deployment_performed": false,
+  "historical_repo_state": "Prior supplied audit reports empty repository; not rechecked live by this packaging task.",
+  "obsolete_handover": "Quarantined as docs/archive/OBSOLETE-handover-DO-NOT-RUN.zip; not executable through an active package installer."
+}
