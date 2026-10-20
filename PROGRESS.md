@@ -1,8 +1,8 @@
 # Implementation checkpoint
 
 Updated: 2026-10-20 (Europe/Berlin).
-Current phase: P02 — B1/B2/B4 accepted locally and in hosted CI; B3 continues across later tenant-facing paths. Guarded Windows runtime restart remains blocked.
-Next action: resolve the local Docker binding gate, then rerun guarded acceptance and continue P03 durable human support.
+Current phase: P02 — B1/B2/B4 accepted locally and in hosted CI; B3 continues across later tenant-facing paths. Guarded Windows runtime restart and acceptance now pass.
+Next action: P03 C1–C4 durable human support; extend B3 isolation to each new path.
 
 ## Repository and focused delivery
 
@@ -13,7 +13,8 @@ Branch: `feat/identity-tenant-boundaries`, based on P01 checkpoint 315b2ba. Init
 - e0dfa3e0fad43b721827a27fd3ab12bd8bf23468: feature-owned schemas, forced RLS, restricted roles, private storage and job leases.
 - 5249fd56aa5bd91c944c4df7cc1a0605bd968cc9: verified merchant sessions, organizations, staff permissions/UI and encrypted credential storage/rotation.
 - 6c14e3a7d288d74f6b06c9809c5b56bde42e2bf8: real-service/browser acceptance harness and CI.
-- All pushed to the named feature branch; remote ref matched 6c14e3a. Subsequent checkpoint publication changes documentation/task status only.
+- 5925d2cb9fd74dc829168281505bf1850e6bdb1b: preserve local services with explicit loopback ports, backups and guarded restart/reset checks. Pushed; remote ref matched this SHA.
+- Earlier source/checkpoint commits are also pushed.
 - Author/committer verified as NanaAddoDBA <nanaaddoldoe@gmail.com>, no attribution trailers. No shared history rewrite, merge or pull request.
 
 ## Implemented P02 paths
@@ -35,18 +36,22 @@ B3 remains an ongoing gate for realtime, application caches and exports when tho
 - Local security advisor reported no warnings/errors.
 - Hosted [run 39422857753](https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39422857753) passed for exact source commit 6c14e3a. Both jobs passed: frozen install, full foundation checks, guarded loopback startup, migration upgrade/replay, real Auth/Postgres/Storage tests, security advisor and cleanup. The final committed runtime guard and test harness were therefore verified on hosted Linux; the restart issue is specific to the inspected Windows Docker Desktop runtime.
 
-## Current Docker gate — do not report local startup as passing
+- Hosted [run 39444605050](https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39444605050) passed for runtime fix 5925d2c: foundation and tenant-isolation jobs both completed successfully, including guarded migration replay and real-service acceptance on Linux.
 
-Docker Desktop 29.8.2 was started and exercised successfully. A final port-binding audit found that it ignored the officially documented bridge loopback default. A disposable probe reproduced that behavior; an explicit loopback-port probe worked. Both probes were stopped/removed. The committed wrapper now checks actual bindings and stops this project's stack if unsafe. Its final fail-closed check passed: project services stopped, data preserved. Existing Docker engine/other projects were left alone.
+## Windows Docker gate resolved
 
-Automatic approval review rejected the proposed replacement of the three published project containers through the Docker API because of configuration/data-preservation risk without specific authorization. That replacement was not executed and is not imported by committed code. The reviewable candidate is only in ignored `.tooling/proposed-bind-local-ports.mjs`.
+The owner specifically authorized the three-service recreation. Original stopped database and storage volumes were archived read-only before startup; tar integrity and SHA-256 checks passed. Private archives/configuration snapshots remain under ignored `.tooling/backups/`. The replacement preserves original mounts, image, settings and network aliases; gateway certificates/configuration transfer as tar with Linux permissions intact. Postgres replacement restarts existing Auth/REST/storage services to clear stale connections. Only database/gateway/mail containers are recreated; unrelated projects are untouched.
 
-Minimum owner action: repair Docker's binding behavior, or specifically authorize a reviewed replacement of only this disposable project's three published containers with explicit loopback ports while preserving mounted data. Then rerun guarded migration, database and browser acceptance. Do not disable the binding guard. Earlier successful real-service results remain evidence of application behavior; they do not make the final Windows startup green.
+Guarded startup and a full stop/start passed. Actual final bindings are exclusively 127.0.0.1:55422 (database), :55421 (API gateway) and :55424 (local mail). Guarded migration upgrade/replay passed, followed by 11 real-service tests with no failures/skips, both built-preview browser segments, security advisor exit 0, workspace checks/smoke, formatting and browser-secret scan. The mobile screenshot was inspected. Initial certificate/ownership and stale-connection failures were fixed and are recorded in docs/evidence/p02-windows-loopback.md.
+
+The wrapper still rejects unsafe final bindings. The CLI can briefly create default all-interface mappings before Windows replacement during startup/reset; this local fallback is not a production network-isolation mechanism. Migration replay intentionally rebuilds disposable synthetic state; original pre-repair data is retained in the private archives. This is archive integrity and local runtime preservation evidence, not the production backup/restore gate.
 
 ## Deployment and continuation
 
 No hosted Supabase project, real customer data, external email, provider spending, live commerce/billing, staging or production deployment was used. Test mail was intercepted locally. Worker business handlers, durable chat and commerce/model/billing workflows remain unimplemented.
 
-After the binding prerequisite: `pnpm local:start`, set LOCAL_DB_TESTS=1, run test:migrations/test:db/local:advisors, prepare local runtime again, start API and preview, and run the account/invitation browser segments. P03 C1–C4 is next, preserving current-session authorization and extending B3 to every new path. Hosted/provider/production gates stay separate.
+P03 C1–C4 is next, preserving current-session authorization and extending B3 to every new path. B1/B2/B4 remain accepted; B3 remains in progress for future realtime, application-cache and export paths. Hosted/provider/production gates stay separate.
 
-Ignored artifacts retain development dependencies, synthetic runtime/fixture files, screenshots, a P01 disposable verification checkout and the unexecuted replacement proposal. Only checkpoint documentation is being changed after the source/test commits; no unrelated edits were staged.
+Ignored artifacts retain private backups, development dependencies, synthetic runtime/fixture files, screenshots and the historical replacement proposal. No unrelated edits were staged. Final process/CI publication state is recorded in the follow-up evidence.
+
+Final local state: repaired project services remain running on explicit loopback bindings. Acceptance browser/API/preview processes were stopped. Private original-volume backups remain in `.tooling/backups/pre-loopback-20261020/`; configuration snapshots and later replacement backups remain alongside them. No staging/production deployment.

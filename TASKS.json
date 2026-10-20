@@ -2,7 +2,7 @@
   "schema_version": 1,
   "prepared_on": "2026-10-20",
   "source": "docs/reference/verified-status-and-checklist.md",
-  "status_note": "P02 B1/B2/B4 accepted from real local/browser evidence and successful hosted CI for source 6c14e3a on 2026-10-20. B3 remains open for future realtime/cache/export paths. Windows-only guarded runtime restart remains blocked; no production acceptance inferred.",
+  "status_note": "P02 B1/B2/B4 accepted; Windows guarded startup/restart, migration replay, 11 real-service tests and both browser segments now pass with preserved private backups. B3 remains open for future realtime/cache/export paths. No staging/production acceptance inferred.",
   "allowed_overall_statuses": [
     "open",
     "in_progress",
@@ -188,16 +188,19 @@
       "production_status": "not_verified",
       "evidence": [
         "docs/evidence/p02-identity-tenancy.md",
-        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39422857753"
+        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39422857753",
+        "docs/evidence/p02-windows-loopback.md",
+        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39444605050"
       ],
       "commits": [
         "e0dfa3e0fad43b721827a27fd3ab12bd8bf23468",
         "5249fd56aa5bd91c944c4df7cc1a0605bd968cc9",
-        "6c14e3a7d288d74f6b06c9809c5b56bde42e2bf8"
+        "6c14e3a7d288d74f6b06c9809c5b56bde42e2bf8",
+        "5925d2cb9fd74dc829168281505bf1850e6bdb1b"
       ],
       "remote_refs": ["origin/feat/identity-tenant-boundaries"],
       "blockers": [],
-      "follow_up": "Guarded local Windows restart is tracked separately in PROGRESS.md. Hosted Linux validated the final runtime guard and real-service suite; no staging/production acceptance inferred."
+      "follow_up": "Windows runtime gate resolved with verified local startup/restart and acceptance. Hosted/provider/staging/production gates remain separate."
     },
     {
       "id": "B2",
@@ -214,16 +217,19 @@
       "production_status": "not_verified",
       "evidence": [
         "docs/evidence/p02-identity-tenancy.md",
-        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39422857753"
+        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39422857753",
+        "docs/evidence/p02-windows-loopback.md",
+        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39444605050"
       ],
       "commits": [
         "e0dfa3e0fad43b721827a27fd3ab12bd8bf23468",
         "5249fd56aa5bd91c944c4df7cc1a0605bd968cc9",
-        "6c14e3a7d288d74f6b06c9809c5b56bde42e2bf8"
+        "6c14e3a7d288d74f6b06c9809c5b56bde42e2bf8",
+        "5925d2cb9fd74dc829168281505bf1850e6bdb1b"
       ],
       "remote_refs": ["origin/feat/identity-tenant-boundaries"],
       "blockers": [],
-      "follow_up": "Guarded local Windows restart is tracked separately in PROGRESS.md. Hosted Linux validated the final runtime guard and real-service suite; no staging/production acceptance inferred."
+      "follow_up": "Windows runtime gate resolved with verified local startup/restart and acceptance. Hosted/provider/staging/production gates remain separate."
     },
     {
       "id": "B3",
@@ -240,18 +246,19 @@
       "production_status": "not_verified",
       "evidence": [
         "docs/evidence/p02-identity-tenancy.md",
-        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39422857753"
+        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39422857753",
+        "docs/evidence/p02-windows-loopback.md",
+        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39444605050"
       ],
       "commits": [
         "e0dfa3e0fad43b721827a27fd3ab12bd8bf23468",
         "5249fd56aa5bd91c944c4df7cc1a0605bd968cc9",
-        "6c14e3a7d288d74f6b06c9809c5b56bde42e2bf8"
+        "6c14e3a7d288d74f6b06c9809c5b56bde42e2bf8",
+        "5925d2cb9fd74dc829168281505bf1850e6bdb1b"
       ],
       "remote_refs": ["origin/feat/identity-tenant-boundaries"],
-      "blockers": [
-        "Docker Desktop ignores the project bridge loopback default; guarded local startup correctly refuses it. Container replacement was rejected by automatic approval review and requires specific authorization or a runtime binding repair."
-      ],
-      "remaining_work": "Resolve safe runtime restart, rerun acceptance, and extend isolation tests to realtime, application caches and exports as those paths are built."
+      "blockers": [],
+      "remaining_work": "Extend isolation tests to realtime, application caches and exports as those paths are built. Windows runtime gate resolved with verified local restart and acceptance."
     },
     {
       "id": "B4",
@@ -268,16 +275,19 @@
       "production_status": "not_verified",
       "evidence": [
         "docs/evidence/p02-identity-tenancy.md",
-        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39422857753"
+        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39422857753",
+        "docs/evidence/p02-windows-loopback.md",
+        "https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39444605050"
       ],
       "commits": [
         "e0dfa3e0fad43b721827a27fd3ab12bd8bf23468",
         "5249fd56aa5bd91c944c4df7cc1a0605bd968cc9",
-        "6c14e3a7d288d74f6b06c9809c5b56bde42e2bf8"
+        "6c14e3a7d288d74f6b06c9809c5b56bde42e2bf8",
+        "5925d2cb9fd74dc829168281505bf1850e6bdb1b"
       ],
       "remote_refs": ["origin/feat/identity-tenant-boundaries"],
       "blockers": [],
-      "follow_up": "Guarded local Windows restart is tracked separately in PROGRESS.md. Hosted Linux validated the final runtime guard and real-service suite; no staging/production acceptance inferred."
+      "follow_up": "Windows runtime gate resolved with verified local startup/restart and acceptance. Hosted/provider/staging/production gates remain separate."
     },
     {
       "id": "C1",

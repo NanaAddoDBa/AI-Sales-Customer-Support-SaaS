@@ -19,7 +19,7 @@ The Windows fallback is part of `local:start`; Linux retains the bridge default 
 
 ## Acceptance
 
-Results will be recorded below after completion. Local synthetic test services only; no hosted deployment or external email.
+Completed checks are recorded below. Local synthetic test services only; no hosted deployment or external email.
 
 The first real-service run after reset failed on synthetic user creation. Sanitized Auth diagnostics identified PostgreSQL `57P01` (an administrator-terminated stale connection). The repair now restarts the existing local Auth/REST/storage containers after replacing Postgres and waits for health; it does not recreate them. A full guarded stop/start then passed, followed immediately by 11 passing real-service tests with no failures/skips.
 
@@ -39,3 +39,10 @@ The first real-service run after reset failed on synthetic user creation. Saniti
 The initial workspace-check invocation encountered the existing Windows Corepack cache-path issue; rerunning with workspace-local COREPACK_HOME and download prompts disabled passed. No dependency or lockfile change was needed.
 
 Both built-preview browser segments passed on the repaired stack: account signup/verification/recovery/password changes and owner/admin/agent/viewer/revoked permissions; invitation acceptance/revocation and responsive mobile layout. The CLI reported no journey error. Fresh artifacts: `output/playwright/identity-mobile.png` and `identity-desktop.png` (ignored, synthetic fixtures). The mobile screenshot was visually inspected. Browser secret scan passed against six actual local secret canaries across six build artifacts. No privileged values were printed or committed.
+
+
+## Publication
+
+Runtime fix: `5925d2cb9fd74dc829168281505bf1850e6bdb1b`, `fix(runtime): preserve local services with explicit loopback ports`. Author and committer NanaAddoDBA <nanaaddoldoe@gmail.com>, no attribution trailers. Pushed to origin/feat/identity-tenant-boundaries; ls-remote matched the exact SHA. Staged changes matched none of seven private local runtime values. Hosted [run 39444605050](https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS/actions/runs/39444605050) completed successfully for this exact source SHA: foundation and tenant-isolation jobs both passed (full checks, guarded startup, migration replay, real-service suite, advisors and cleanup). `gh run view 39444605050 --json status,conclusion,jobs,url` confirmed completed/success. The following checkpoint commit changes documentation/task state only.
+
+Final local process state: the repaired project services remain healthy with explicit loopback bindings. The acceptance browser, built dashboard preview and temporary API process were stopped. Private backups and synthetic test artifacts remain ignored; unrelated projects/processes were preserved.
