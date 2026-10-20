@@ -16,3 +16,23 @@ jobs:
       - run: pnpm check
       - run: pnpm smoke
       - run: pnpm format:check
+  tenant-isolation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      LOCAL_DB_TESTS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm local:start
+      - run: pnpm test:migrations
+      - run: pnpm test:db
+      - run: pnpm local:advisors
+      - if: always()
+        run: pnpm local:stop
