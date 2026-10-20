@@ -1,3 +1,4 @@
+import { bindLocalPorts } from "./bind-local-ports.mjs";
 import { execFileSync } from "node:child_process";
 import { createRequire } from "node:module";
 import { randomUUID } from "node:crypto";
@@ -14,7 +15,7 @@ const require = createRequire(
   new URL("../packages/database/package.json", import.meta.url),
 );
 const { Pool } = require("pg");
-function cli(args) {
+async function cli(args) {
   try {
     execFileSync(
       process.execPath,
@@ -26,11 +27,29 @@ function cli(args) {
       ],
       { stdio: "pipe", windowsHide: true },
     );
+    if (process.platform === "win32") await bindLocalPorts();
+    assertLoopbackBindings();
   } catch {
-    throw new Error("Local migration command failed; raw CLI output withheld");
+    try {
+      execFileSync(
+        process.execPath,
+        [
+          "node_modules/supabase/dist/supabase.js",
+          "stop",
+          "--network-id",
+          localNetwork,
+        ],
+        { stdio: "pipe", windowsHide: true },
+      );
+    } catch {
+      /* Report failure without exposing CLI keys. */
+    }
+    throw new Error(
+      "Local migration command or binding verification failed; raw CLI output withheld",
+    );
   }
 }
-cli([
+await cli([
   "db",
   "reset",
   "--local",
@@ -46,7 +65,7 @@ await previous.query(
   [id, "Synthetic migration preservation"],
 );
 await previous.end();
-cli(["db", "push", "--local", "--yes"]);
+await cli(["db", "push", "--local", "--yes"]);
 const upgraded = new Pool({ connectionString: config.DB_URL });
 assert.equal(
   (
@@ -65,7 +84,7 @@ assert.equal(
   2,
 );
 await upgraded.end();
-cli(["db", "reset", "--local", "--no-seed", "--yes"]);
+await cli(["db", "reset", "--local", "--no-seed", "--yes"]);
 const fresh = new Pool({ connectionString: config.DB_URL });
 assert.equal(
   (

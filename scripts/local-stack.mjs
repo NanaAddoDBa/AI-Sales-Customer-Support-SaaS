@@ -4,6 +4,7 @@ import {
   assertLoopbackBindings,
   localNetwork,
 } from "./local-network.mjs";
+import { bindLocalPorts } from "./bind-local-ports.mjs";
 const action = process.argv[2];
 const commands = {
   start: [
@@ -49,6 +50,7 @@ if (code !== 0) {
 } else {
   if (action === "start") {
     try {
+      if (process.platform === "win32") await bindLocalPorts();
       assertLoopbackBindings();
     } catch {
       const stop = spawn(
@@ -63,7 +65,7 @@ if (code !== 0) {
       );
       await new Promise((resolve) => stop.once("exit", resolve));
       throw new Error(
-        "Unsafe local port bindings rejected; project stack stopped",
+        "Local binding repair or verification failed; project stack stopped",
       );
     }
   }
