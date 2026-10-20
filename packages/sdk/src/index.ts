@@ -20,3 +20,9 @@ export async function fetchHealth(
     throw new Error("Invalid health response");
   return body as Health;
 }
+export {
+  MerchantClient,
+  type AuthSession,
+  type Organization,
+  type Membership,
+} from "./identity.js";

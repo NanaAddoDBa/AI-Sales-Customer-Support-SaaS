@@ -11,3 +11,4 @@ export function readRuntimeConfig(
     throw new Error("HOST must be a supported bind address");
   return { host, port: Number(raw) };
 }
+export { readIdentityConfig, readCredentialKeyring } from "./identity.js";

@@ -12,4 +12,3 @@ grant select,insert,update on integrations.connections to sales_api;
 create policy credential_read on integrations.connections for select to sales_api using(private.recent_manager(organization_id));
 create policy credential_insert on integrations.connections for insert to sales_api with check(private.recent_manager(organization_id));
 create policy credential_update on integrations.connections for update to sales_api using(private.recent_manager(organization_id)) with check(private.recent_manager(organization_id));
-

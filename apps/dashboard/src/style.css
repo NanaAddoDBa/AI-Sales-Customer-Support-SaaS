@@ -1,0 +1,85 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #162b3b;
+  background: #f4f6f8;
+  line-height: 1.5;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 32px 20px;
+}
+section {
+  background: white;
+  border: 1px solid #cbd5df;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+}
+form {
+  display: grid;
+  gap: 16px;
+  max-width: 480px;
+  margin: 24px 0;
+}
+label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+}
+input,
+select,
+textarea,
+button {
+  font: inherit;
+  padding: 10px;
+  border: 1px solid #728392;
+  border-radius: 4px;
+}
+button {
+  cursor: pointer;
+  background: #154b70;
+  color: white;
+  min-height: 44px;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #ce7b00;
+  outline-offset: 3px;
+}
+nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+li {
+  padding: 16px 0;
+  overflow-wrap: anywhere;
+}
+li button {
+  margin-top: 10px;
+}
+[role="alert"] {
+  color: #9b192b;
+  background: #fff0f1;
+  padding: 12px;
+}
+[role="status"] {
+  background: #e3f4ec;
+  padding: 12px;
+}
+textarea {
+  overflow-wrap: anywhere;
+}
+h1 {
+  margin-bottom: 4px;
+}

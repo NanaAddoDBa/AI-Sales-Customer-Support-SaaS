@@ -10,6 +10,6 @@ With Docker running, install from the lockfile, then use `pnpm local:start`. The
 
 After tests, `pnpm local:prepare` generates ignored local runtime configuration and rotates the two local application role passwords. Then `pnpm local:api` starts the built API on port 19311 and `pnpm --filter @sales-support/dashboard dev` starts the dashboard on port 5183. Preparation invalidates earlier local role connection passwords, so stop development API processes before rerunning DB tests. `pnpm local:advisors` runs the local security advisor. `pnpm local:stop` stops only this project's stack.
 
+The startup wrapper requests a project-specific Docker bridge with published ports bound to 127.0.0.1 and verifies actual database/API/mail bindings. It stops the stack if those bindings are unsafe. Migration replay checks bindings before rebuilding. This follows https://supabase.com/docs/guides/local-development. Docker Desktop 29.8.2 on the inspected Windows machine ignored the bridge default: local startup is currently blocked by the guard, with all project services stopped and data preserved. Real-service acceptance ran successfully before that final hardening check. Do not bypass the guard or start with all-interface defaults; repair the runtime binding behavior or obtain explicit approval for a reviewed per-container replacement.
+
 These commands never imply cloud verification. Local email is intercepted by Mailpit at http://127.0.0.1:55424. The elevated local mail allowance is for synthetic tests only. No seed/customer data is shipped. Test-created synthetic accounts/records remain until the next acknowledged disposable replay.
-
-

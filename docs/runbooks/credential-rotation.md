@@ -1,0 +1,13 @@
+# Credential keys, database roles and rotation
+
+Use a deployment secret manager for API_DATABASE_URL, the independent WORKER_DATABASE_URL, CREDENTIAL_ACTIVE_KEY and CREDENTIAL_KEYS_JSON. The API requires the sales_api role; future job workers use sales_worker. Neither role has RLS bypass. Never use the Supabase postgres/service-role secret as the application pool credential. Remote database URLs require verified TLS. SUPABASE_PUBLISHABLE_KEY is public Auth configuration; it cannot grant privileged database access.
+
+Generate independent cryptographically random 32-byte keys in a secure owner-controlled environment. CREDENTIAL_KEYS_JSON maps version IDs to canonical base64 keys; CREDENTIAL_ACTIVE_KEY selects an existing entry. Configuration rejects short/missing/malformed keys without echoing values. The application never invents a default credential key. No provider credential HTTP route is enabled in this phase; adapters receive CredentialCipher explicitly when implemented.
+
+To rotate: add a new version to the server key ring, deploy with the new active ID while keeping old keys available, and use CredentialRepository.rotate under a verified recent owner/admin session for each connection. The transaction locks the row, authenticates its old envelope against organization/connection/provider context, and reencrypts using a fresh nonce and the active key. Verify row counts/key IDs and integration operation with approved test credentials. Logs must record only non-sensitive IDs and outcomes.
+
+Keep old key versions for the documented rollback/backup retention period. Remove them only after current envelopes and required restored backups can be read with retained keys. Missing keys or authenticated-context mismatches fail closed. Never paste key material into a chat, issue, commit or evidence record. Restoring ciphertext without the corresponding authorized key ring is not a successful restore.
+
+For a database-password rotation, provision new role credentials through secure database administration, update the server-only secret, recycle pools, test login and tenant denial paths, then retire old credentials. Local synthetic preparation uses generated passwords and an ignored runtime file; that mechanism is not production secret management.
+
+Production session policy, TLS, SMTP delivery and key-manager provisioning remain deployment acceptance gates. Member role changes and sign-out are checked against live rows on every API transaction; membership/credential changes require sign-in within 15 minutes. MFA for SaaS-operator emergency access is a later separate operator gate, not granted by merchant owner status.

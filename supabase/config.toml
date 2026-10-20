@@ -40,4 +40,3 @@ sign_in_sign_ups = 100
 enabled = false
 [edge_runtime]
 enabled = false
-

@@ -12,6 +12,7 @@
     "@sales-support/backend": "workspace:*",
     "@sales-support/config": "workspace:*",
     "@sales-support/observability": "workspace:*",
-    "fastify": "5.12.7"
+    "fastify": "5.12.7",
+    "@sales-support/database": "workspace:*"
   }
 }

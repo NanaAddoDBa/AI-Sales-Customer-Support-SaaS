@@ -10,6 +10,9 @@ importers:
       "@types/node":
         specifier: 22.20.5
         version: 22.20.5
+      "@types/pg":
+        specifier: 8.23.1
+        version: 8.23.1
       "@types/react":
         specifier: 19.3.0
         version: 19.3.0
@@ -22,6 +25,9 @@ importers:
       prettier:
         specifier: 3.9.10
         version: 3.9.10
+      supabase:
+        specifier: 2.121.0
+        version: 2.121.0
       tsx:
         specifier: 4.23.15
         version: 4.23.15
@@ -43,6 +49,9 @@ importers:
       "@sales-support/config":
         specifier: workspace:*
         version: link:../../packages/config
+      "@sales-support/database":
+        specifier: workspace:*
+        version: link:../../packages/database
       "@sales-support/observability":
         specifier: workspace:*
         version: link:../../packages/observability
@@ -52,6 +61,9 @@ importers:
 
   apps/dashboard:
     dependencies:
+      "@sales-support/sdk":
+        specifier: workspace:*
+        version: link:../../packages/sdk
       "@sales-support/ui":
         specifier: workspace:*
         version: link:../../packages/ui
@@ -99,15 +111,31 @@ importers:
 
   packages/backend:
     dependencies:
+      "@sales-support/config":
+        specifier: workspace:*
+        version: link:../config
       "@sales-support/contracts":
         specifier: workspace:*
         version: link:../contracts
+      "@sales-support/database":
+        specifier: workspace:*
+        version: link:../database
+      "@supabase/supabase-js":
+        specifier: 2.118.0
+        version: 2.118.0
+      fastify:
+        specifier: 5.12.7
+        version: 5.12.7
 
   packages/config: {}
 
   packages/contracts: {}
 
-  packages/database: {}
+  packages/database:
+    dependencies:
+      pg:
+        specifier: 8.23.1
+        version: 8.23.1
 
   packages/observability: {}
 
@@ -137,6 +165,15 @@ packages:
       {
         integrity: sha512-buipgOVDkkPXNR5+xBpDw7Zk2n1EvU7qBJCNUcL7rhQ//kfpOXPAvQ511Os0vpLYJ1pZnvudNytkQt2hst3wqA==,
       }
+
+  "@ecies/ciphers@0.2.6":
+    resolution:
+      {
+        integrity: sha512-patgsRPKGkhhoBjETV4XxD0En4ui5fbX0hzayqI3M8tvNMGUoUvmyYAIWwlxBc1KX5cturfqByYdj5bYGRpN9g==,
+      }
+    engines: { bun: ">=1", deno: ">=2.7.10", node: ">=16" }
+    peerDependencies:
+      "@noble/ciphers": ^1.0.0
 
   "@esbuild/aix-ppc64@0.28.2":
     resolution:
@@ -515,6 +552,27 @@ packages:
         integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==,
       }
 
+  "@noble/ciphers@1.3.0":
+    resolution:
+      {
+        integrity: sha512-2I0gnIVPtfnMw9ee9h1dJG7tp81+8Ob3OJb3Mv37rx5L40/b0i7djjCVvGOVqc9AEIQyvyu1i6ypKdFw8R8gQw==,
+      }
+    engines: { node: ^14.21.3 || >=16 }
+
+  "@noble/curves@1.9.7":
+    resolution:
+      {
+        integrity: sha512-gbKGcRUYIjA3/zCCNaWDciTMFI0dCkvou3TL8Zmy5Nc7sJ47a0jtOeZoTaMxkuqRo9cRhjOdZJXegxYE5FN/xw==,
+      }
+    engines: { node: ^14.21.3 || >=16 }
+
+  "@noble/hashes@1.8.0":
+    resolution:
+      {
+        integrity: sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==,
+      }
+    engines: { node: ^14.21.3 || >=16 }
+
   "@oxc-project/types@0.154.0":
     resolution:
       {
@@ -674,6 +732,127 @@ packages:
         integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==,
       }
 
+  "@supabase/auth-js@2.118.0":
+    resolution:
+      {
+        integrity: sha512-xWfPXyhS2KDSfAneMtI6p/tBnbdiz/5vaRKXEqUfzfC9WCniKr2Ds5o5G7RIGig0bom4z6wUY9zaV07WDVTfnQ==,
+      }
+    engines: { node: ">=22.0.0" }
+
+  "@supabase/cli-darwin-arm64@2.121.0":
+    resolution:
+      {
+        integrity: sha512-ZvXKj3wW4Kq5/MrG2xdgZeOWETxmUC9jl16X/i/np7u5A/WLuC/L0+KKY5i0eCrTnNwWFpZdlWKzu/J9QgkPgg==,
+      }
+    cpu: [arm64]
+    os: [darwin]
+
+  "@supabase/cli-darwin-x64@2.121.0":
+    resolution:
+      {
+        integrity: sha512-s+bnLljdI5MYlt92rJnsIuVcTYtmJyydUB/FUsKm5KCyD+HpwnY1hL6m/+bKZQCwIHsql1dlmJRZ0HNZOZzuTQ==,
+      }
+    cpu: [x64]
+    os: [darwin]
+
+  "@supabase/cli-linux-arm64-musl@2.121.0":
+    resolution:
+      {
+        integrity: sha512-8fGnWhnnbf3zdV7mQvEHb4qa1LMTq/JpSdO109O/Lxy246Dwar8o5XrDgy7bBK8QLzvp0XH+p1ky+wxRGVFzpw==,
+      }
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  "@supabase/cli-linux-arm64@2.121.0":
+    resolution:
+      {
+        integrity: sha512-JKvffWRuzS1+cVzgv1gWi2nWaCGvS22mMMwEBnSkRFD0BSdN1QHZ7yteI7uRg1HV9R0s+HCwg1rtjrHnAEE55Q==,
+      }
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  "@supabase/cli-linux-x64-musl@2.121.0":
+    resolution:
+      {
+        integrity: sha512-diDbFsC/KRmnOGUYYBxmUqn6ccqB+jliesMfp821grDIVkq9ucqg/aUjCOsCyRbcs5uhgbbWgh9YWTuxfVpZog==,
+      }
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  "@supabase/cli-linux-x64@2.121.0":
+    resolution:
+      {
+        integrity: sha512-87EhtLctkNtC51CPhyeLoSdoGGzCZ3iNbSdczdcSklbvg0RsJbU+mTDaF3v53EWuPhyM0VRYqZJZNnjI5ABLcg==,
+      }
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  "@supabase/cli-windows-arm64@2.121.0":
+    resolution:
+      {
+        integrity: sha512-cHpGQTLXUm4Uk9NzIdv8oUvmsNq7mlAN/CmVqNYzMUJyqmFofOPETwYPShDV9apA+5k84oKU93tn3N4wv7B3yg==,
+      }
+    cpu: [arm64]
+    os: [win32]
+
+  "@supabase/cli-windows-x64@2.121.0":
+    resolution:
+      {
+        integrity: sha512-uvWiQ3cGKrZhtkctXHJJY0r0L6D2s/Dbc8/CxOVDxlXIH5mG3f8ZbqwMs9eRbPDqifyYFlwl+BX+tY3aJosIxQ==,
+      }
+    cpu: [x64]
+    os: [win32]
+
+  "@supabase/functions-js@2.118.0":
+    resolution:
+      {
+        integrity: sha512-4ofletPa/noKAU6KHeqsd3FztGzRPUEJRey1MKY0o+PIHaVePqRPShIXtl37gcVyIWaFM+zNg6r9zh0uUSFOSA==,
+      }
+    engines: { node: ">=22.0.0" }
+
+  "@supabase/phoenix@0.4.5":
+    resolution:
+      {
+        integrity: sha512-aAn9H9ovVyeApKy11OWOrrOGq8DV68yWeH4ud2lN9fzn4aO8Zb5GLL9m1pUg9nLqIcT+ZDfAcsZe0E/nqdv2lw==,
+      }
+
+  "@supabase/postgrest-js@2.118.0":
+    resolution:
+      {
+        integrity: sha512-JXy+37KPApHsyotaQACovv/Jy9E22rfiWLRuT+2UjoEAcAIelDFIrsF/FY47Dy19mO7lI0Tq+zDCX8oJ2Ozfiw==,
+      }
+    engines: { node: ">=22.0.0" }
+
+  "@supabase/realtime-js@2.118.0":
+    resolution:
+      {
+        integrity: sha512-pzCIEWjqD5/xqEZQerpt+q9rsgYkcrkgCJgf0W2ULqC4fYUeB/p9CFa3t9vn+IVh6dMN9r4ZCE262lZvUC+Bfw==,
+      }
+    engines: { node: ">=22.0.0" }
+
+  "@supabase/storage-js@2.118.0":
+    resolution:
+      {
+        integrity: sha512-5MNkKt2Moy7Jud/sPX7/28BwdDxZMCVHGJT00b8op3KRa9LKSjOAYU5IcfGWIstaasAqY8GkbA6oI3IRDgB1YQ==,
+      }
+    engines: { node: ">=22.0.0" }
+
+  "@supabase/supabase-js@2.118.0":
+    resolution:
+      {
+        integrity: sha512-FxI8UXMVC2UG7IkeiI8fuQZqq2oI3JeSuN8MPIC2RLVaoEAxKS0nqE6kii9Ewpq8f9gNPM6git1Y8f0vN/QLFw==,
+      }
+    engines: { node: ">=22.0.0" }
+    peerDependencies:
+      "@opentelemetry/api": ">=1.0.0"
+    peerDependenciesMeta:
+      "@opentelemetry/api":
+        optional: true
+
   "@turbo/darwin-64@2.11.9":
     resolution:
       {
@@ -744,6 +923,12 @@ packages:
     resolution:
       {
         integrity: sha512-U2+DNr+wSjpsTS/wZGYHq7GcwfuSmKiKvoPvK22zwTlRhU91yOniN4qRR5KhIjvif7ysw/dz/hKmfDH0Ris4aA==,
+      }
+
+  "@types/pg@8.23.1":
+    resolution:
+      {
+        integrity: sha512-fKVHpikPdg4GKks3JuLEhvwSyvwzF23hnabPy6DD8ljVbC7+6J5dQzdv4arV6jqq57djnMgs1HKBxX4P8aBI3A==,
       }
 
   "@types/react-dom@19.3.0":
@@ -979,6 +1164,13 @@ packages:
       }
     engines: { node: ">=8" }
 
+  eciesjs@0.5.0:
+    resolution:
+      {
+        integrity: sha512-s0J9SEVYAEPg7J63GFMApLYzPH9VNIQIyC6s15JpnqVc0TqcKWdbgFlnAweEBRyMmko2dcs2sfC83Hj4J43tuA==,
+      }
+    engines: { bun: ">=1", deno: ">=2.7.10", node: ">=16" }
+
   esbuild@0.28.2:
     resolution:
       {
@@ -1201,6 +1393,13 @@ packages:
         integrity: sha512-p/LgFzRN5FeoD3DLS6bkUapeye6E4SI6yJs6KetENd18S+FBthqYq2amJUWpt5z0EQwwHemidjY5OqJGEKm5uA==,
       }
 
+  iceberg-js@0.8.1:
+    resolution:
+      {
+        integrity: sha512-1dhVQZXhcHje7798IVM+xoo/1ZdVfzOMIc8/rgVSijRK38EDqOJoGula9N/8ZI5RD8QTxNQtK/Gozpr+qUqRRA==,
+      }
+    engines: { node: ">=20.0.0" }
+
   ignore@5.3.2:
     resolution:
       {
@@ -1247,6 +1446,12 @@ packages:
     resolution:
       {
         integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==,
+      }
+
+  jose@6.2.13:
+    resolution:
+      {
+        integrity: sha512-7TIg10ZE1x82YediN+lcrPNvGMKge9yFHQD+Qho/b8y2adfugU3AsvvHfxV0fzyFllT6l9xCjf4RWY9g/Z9PJQ==,
       }
 
   json-schema-ref-resolver@3.0.1:
@@ -1478,6 +1683,64 @@ packages:
       }
     engines: { node: ">=8" }
 
+  pg-cloudflare@1.4.1:
+    resolution:
+      {
+        integrity: sha512-6PQbsFWZcp9EmJEwy5cGQ2La+AMWpP46lgbb8X+U/XsHIUweYDNCpeuKck5RxL2MdVFi7krbbEi5nX4Zh7JhrQ==,
+      }
+
+  pg-connection-string@2.14.1:
+    resolution:
+      {
+        integrity: sha512-qR3kGNPBLpCNtz0evbKA0Y/MRFXwSSdT+pTJvYp/bXTcReZbvX1kzF0IyTc1QnxqF7AZbOeBhNL8R5mYQZV/MA==,
+      }
+
+  pg-int8@1.0.1:
+    resolution:
+      {
+        integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==,
+      }
+    engines: { node: ">=4.0.0" }
+
+  pg-pool@3.14.0:
+    resolution:
+      {
+        integrity: sha512-gKtPkFdQPU3DksooVLi9LsjZxrsBUZIpa+7aVx+LV5pNh0KzP4Zleud2po+ConrxbuXGBJ6Hfer6hdgpIBpBaw==,
+      }
+    peerDependencies:
+      pg: ">=8.0"
+
+  pg-protocol@1.16.1:
+    resolution:
+      {
+        integrity: sha512-p9VOFMiHB/ZbJATetbg+99PxssTVSQRnyuPSQ67mN1+1KBOjZaZ83ZQzltnxPhJwSsC3nwVjJ10DVJlerbFzLg==,
+      }
+
+  pg-types@2.2.0:
+    resolution:
+      {
+        integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==,
+      }
+    engines: { node: ">=4" }
+
+  pg@8.23.1:
+    resolution:
+      {
+        integrity: sha512-aL96AHANtWjPLDOLqnhx+ngp9+UK7ETEU8VJrDCGvsSSi/mGLcWYsS6Herg7lmaBJe4uwrfqsa7gTEFaSizDoQ==,
+      }
+    engines: { node: ">= 16.0.0" }
+    peerDependencies:
+      pg-native: ">=3.0.1"
+    peerDependenciesMeta:
+      pg-native:
+        optional: true
+
+  pgpass@1.0.5:
+    resolution:
+      {
+        integrity: sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug==,
+      }
+
   picocolors@1.1.1:
     resolution:
       {
@@ -1516,6 +1779,34 @@ packages:
         integrity: sha512-YUbWYCgErwnMAVkjUnYa+KlMBzGpHwiIt/DE7f0G33AuX2LH9UcTk6KgWxd3zRU+pN3u/C+Xl3EnMLM4Hea7Sg==,
       }
     engines: { node: ^10 || ^12 || >=14 }
+
+  postgres-array@2.0.0:
+    resolution:
+      {
+        integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==,
+      }
+    engines: { node: ">=4" }
+
+  postgres-bytea@1.0.1:
+    resolution:
+      {
+        integrity: sha512-5+5HqXnsZPE65IJZSMkZtURARZelel2oXUEO8rH83VS/hxH5vv1uHquPg5wZs8yMAfdv971IU+kcPUczi7NVBQ==,
+      }
+    engines: { node: ">=0.10.0" }
+
+  postgres-date@1.0.7:
+    resolution:
+      {
+        integrity: sha512-suDmjLVQg78nMK2UZ454hAG+OAW+HQPZ6n++TNDUX+L0+uUlLywnoxJKDou51Zm+zTCjrCl0Nq6J9C5hP9vK/Q==,
+      }
+    engines: { node: ">=0.10.0" }
+
+  postgres-interval@1.2.0:
+    resolution:
+      {
+        integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==,
+      }
+    engines: { node: ">=0.10.0" }
 
   prelude-ls@1.2.1:
     resolution:
@@ -1688,6 +1979,13 @@ packages:
       }
     engines: { node: ">= 10.x" }
 
+  supabase@2.121.0:
+    resolution:
+      {
+        integrity: sha512-xffhOgD9rXsXLK+DQ+3Gq8b2KmavMjPHGuJr7lfVlD8vKK1HHFggYlmzdRECqPmOL8g3Yd5PN3URcUR8xWZcWw==,
+      }
+    hasBin: true
+
   thread-stream@4.2.0:
     resolution:
       {
@@ -1717,6 +2015,12 @@ packages:
     engines: { node: ">=18.12" }
     peerDependencies:
       typescript: ">=4.8.4"
+
+  tslib@2.8.1:
+    resolution:
+      {
+        integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==,
+      }
 
   tsx@4.23.15:
     resolution:
@@ -1831,6 +2135,13 @@ packages:
       }
     engines: { node: ">=0.10.0" }
 
+  xtend@4.0.2:
+    resolution:
+      {
+        integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==,
+      }
+    engines: { node: ">=0.4" }
+
   yocto-queue@0.1.0:
     resolution:
       {
@@ -1850,6 +2161,10 @@ snapshots:
     dependencies:
       hashery: 1.5.1
       keyv: 5.6.0
+
+  "@ecies/ciphers@0.2.6(@noble/ciphers@1.3.0)":
+    dependencies:
+      "@noble/ciphers": 1.3.0
 
   "@esbuild/aix-ppc64@0.28.2":
     optional: true
@@ -2008,6 +2323,14 @@ snapshots:
 
   "@keyv/serialize@1.1.1": {}
 
+  "@noble/ciphers@1.3.0": {}
+
+  "@noble/curves@1.9.7":
+    dependencies:
+      "@noble/hashes": 1.8.0
+
+  "@noble/hashes@1.8.0": {}
+
   "@oxc-project/types@0.154.0": {}
 
   "@pinojs/redact@0.4.0": {}
@@ -2059,6 +2382,62 @@ snapshots:
 
   "@rolldown/pluginutils@1.0.1": {}
 
+  "@supabase/auth-js@2.118.0":
+    dependencies:
+      tslib: 2.8.1
+
+  "@supabase/cli-darwin-arm64@2.121.0":
+    optional: true
+
+  "@supabase/cli-darwin-x64@2.121.0":
+    optional: true
+
+  "@supabase/cli-linux-arm64-musl@2.121.0":
+    optional: true
+
+  "@supabase/cli-linux-arm64@2.121.0":
+    optional: true
+
+  "@supabase/cli-linux-x64-musl@2.121.0":
+    optional: true
+
+  "@supabase/cli-linux-x64@2.121.0":
+    optional: true
+
+  "@supabase/cli-windows-arm64@2.121.0":
+    optional: true
+
+  "@supabase/cli-windows-x64@2.121.0":
+    optional: true
+
+  "@supabase/functions-js@2.118.0":
+    dependencies:
+      tslib: 2.8.1
+
+  "@supabase/phoenix@0.4.5": {}
+
+  "@supabase/postgrest-js@2.118.0":
+    dependencies:
+      tslib: 2.8.1
+
+  "@supabase/realtime-js@2.118.0":
+    dependencies:
+      "@supabase/phoenix": 0.4.5
+      tslib: 2.8.1
+
+  "@supabase/storage-js@2.118.0":
+    dependencies:
+      iceberg-js: 0.8.1
+      tslib: 2.8.1
+
+  "@supabase/supabase-js@2.118.0":
+    dependencies:
+      "@supabase/auth-js": 2.118.0
+      "@supabase/functions-js": 2.118.0
+      "@supabase/postgrest-js": 2.118.0
+      "@supabase/realtime-js": 2.118.0
+      "@supabase/storage-js": 2.118.0
+
   "@turbo/darwin-64@2.11.9":
     optional: true
 
@@ -2086,6 +2465,12 @@ snapshots:
   "@types/node@22.20.5":
     dependencies:
       undici-types: 6.21.0
+
+  "@types/pg@8.23.1":
+    dependencies:
+      "@types/node": 22.20.5
+      pg-protocol: 1.16.1
+      pg-types: 2.2.0
 
   "@types/react-dom@19.3.0(@types/react@19.3.0)":
     dependencies:
@@ -2252,6 +2637,13 @@ snapshots:
   dequal@2.0.3: {}
 
   detect-libc@2.1.2: {}
+
+  eciesjs@0.5.0:
+    dependencies:
+      "@ecies/ciphers": 0.2.6(@noble/ciphers@1.3.0)
+      "@noble/ciphers": 1.3.0
+      "@noble/curves": 1.9.7
+      "@noble/hashes": 1.8.0
 
   esbuild@0.28.2:
     optionalDependencies:
@@ -2437,6 +2829,8 @@ snapshots:
 
   hookified@2.2.0: {}
 
+  iceberg-js@0.8.1: {}
+
   ignore@5.3.2: {}
 
   ignore@7.0.13: {}
@@ -2452,6 +2846,8 @@ snapshots:
       is-extglob: 2.1.1
 
   isexe@2.0.0: {}
+
+  jose@6.2.13: {}
 
   json-schema-ref-resolver@3.0.1:
     dependencies:
@@ -2565,6 +2961,41 @@ snapshots:
 
   path-key@3.1.1: {}
 
+  pg-cloudflare@1.4.1:
+    optional: true
+
+  pg-connection-string@2.14.1: {}
+
+  pg-int8@1.0.1: {}
+
+  pg-pool@3.14.0(pg@8.23.1):
+    dependencies:
+      pg: 8.23.1
+
+  pg-protocol@1.16.1: {}
+
+  pg-types@2.2.0:
+    dependencies:
+      pg-int8: 1.0.1
+      postgres-array: 2.0.0
+      postgres-bytea: 1.0.1
+      postgres-date: 1.0.7
+      postgres-interval: 1.2.0
+
+  pg@8.23.1:
+    dependencies:
+      pg-connection-string: 2.14.1
+      pg-pool: 3.14.0(pg@8.23.1)
+      pg-protocol: 1.16.1
+      pg-types: 2.2.0
+      pgpass: 1.0.5
+    optionalDependencies:
+      pg-cloudflare: 1.4.1
+
+  pgpass@1.0.5:
+    dependencies:
+      split2: 4.2.0
+
   picocolors@1.1.1: {}
 
   picomatch@4.0.7: {}
@@ -2594,6 +3025,16 @@ snapshots:
       nanoid: 3.3.20
       picocolors: 1.1.1
       source-map-js: 1.2.2
+
+  postgres-array@2.0.0: {}
+
+  postgres-bytea@1.0.1: {}
+
+  postgres-date@1.0.7: {}
+
+  postgres-interval@1.2.0:
+    dependencies:
+      xtend: 4.0.2
 
   prelude-ls@1.2.1: {}
 
@@ -2675,6 +3116,20 @@ snapshots:
 
   split2@4.2.0: {}
 
+  supabase@2.121.0:
+    dependencies:
+      eciesjs: 0.5.0
+      jose: 6.2.13
+    optionalDependencies:
+      "@supabase/cli-darwin-arm64": 2.121.0
+      "@supabase/cli-darwin-x64": 2.121.0
+      "@supabase/cli-linux-arm64": 2.121.0
+      "@supabase/cli-linux-arm64-musl": 2.121.0
+      "@supabase/cli-linux-x64": 2.121.0
+      "@supabase/cli-linux-x64-musl": 2.121.0
+      "@supabase/cli-windows-arm64": 2.121.0
+      "@supabase/cli-windows-x64": 2.121.0
+
   thread-stream@4.2.0:
     dependencies:
       real-require: 1.0.0
@@ -2689,6 +3144,8 @@ snapshots:
   ts-api-utils@2.5.0(typescript@6.0.3):
     dependencies:
       typescript: 6.0.3
+
+  tslib@2.8.1: {}
 
   tsx@4.23.15:
     dependencies:
@@ -2746,5 +3203,7 @@ snapshots:
       isexe: 2.0.0
 
   word-wrap@1.2.5: {}
+
+  xtend@4.0.2: {}
 
   yocto-queue@0.1.0: {}

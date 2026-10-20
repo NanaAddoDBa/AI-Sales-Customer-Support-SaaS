@@ -13,7 +13,15 @@
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "format": "prettier --write apps packages scripts tests *.json *.yaml *.mjs .github",
     "format:check": "prettier --check apps packages scripts tests *.json *.yaml *.mjs .github",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "test:db": "tsx --test --test-concurrency=1 tests/integration/*.test.ts",
+    "local:start": "node scripts/local-stack.mjs start",
+    "local:stop": "node scripts/local-stack.mjs stop",
+    "local:advisors": "node scripts/local-stack.mjs advisors",
+    "local:prepare": "node scripts/local-runtime.mjs",
+    "local:api": "node scripts/start-local-api.mjs",
+    "test:migrations": "node scripts/test-migrations.mjs",
+    "check:browser-secrets": "node scripts/check-browser-secrets.mjs"
   },
   "devDependencies": {
     "@types/node": "22.20.5",
@@ -24,6 +32,9 @@
     "prettier": "3.9.10",
     "tsx": "4.23.15",
     "turbo": "2.11.9",
-    "typescript": "6.0.3"
-  }
+    "typescript": "6.0.3",
+    "@types/pg": "8.23.1",
+    "supabase": "2.121.0"
+  },
+  "type": "module"
 }

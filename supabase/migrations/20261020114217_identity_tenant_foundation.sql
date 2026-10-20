@@ -229,4 +229,3 @@ grant execute on function private.recent_session() to sales_api;
 grant execute on function private.create_organization(text),private.invite_member(uuid,text,text,text),private.accept_invitation(text),private.change_member(uuid,uuid,text,boolean) to sales_api;
 grant execute on function private.worker_organization(),private.claim_job(),private.complete_job(uuid) to sales_worker;
 alter default privileges in schema private revoke execute on functions from public;
-

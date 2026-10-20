@@ -11,7 +11,8 @@
   "dependencies": {
     "@sales-support/ui": "workspace:*",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "@sales-support/sdk": "workspace:*"
   },
   "devDependencies": {
     "vite": "8.3.4"
