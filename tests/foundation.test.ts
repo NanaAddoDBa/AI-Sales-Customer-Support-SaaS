@@ -14,7 +14,7 @@ for (const [service, factory] of [
       const response = await app.inject("/health");
       assert.equal(response.statusCode, 200);
       assert.deepEqual(response.json(), { status: "ok", service });
-      assert.equal((await app.inject("/ready")).statusCode, 404);
+      assert.equal((await app.inject("/ready")).statusCode, 503);
     } finally {
       await app.close();
     }
