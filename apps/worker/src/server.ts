@@ -56,9 +56,7 @@ export function createServer(options: WorkerServerOptions = {}) {
       options.readiness,
       options.readinessTimeoutMs,
     );
-    return reply
-      .code(readiness.status === "ready" ? 200 : 503)
-      .send(readiness);
+    return reply.code(readiness.status === "ready" ? 200 : 503).send(readiness);
   });
   return app;
 }
