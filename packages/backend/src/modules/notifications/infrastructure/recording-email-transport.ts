@@ -1,4 +1,7 @@
-import type { EmailTransport, PreparedEmail } from "../ports/email-transport.js";
+import type {
+  EmailTransport,
+  PreparedEmail,
+} from "../ports/email-transport.js";
 
 /** Test-only, bounded, no-network transport. Never reports mail as delivered. */
 export class RecordingEmailTransport implements EmailTransport {

@@ -23,7 +23,11 @@ export async function getReadiness(
       Promise.resolve().then(() => probe(controller.signal)),
       timeout,
     ]);
-    return { version: 1, service, status: result === true ? "ready" : "not_ready" };
+    return {
+      version: 1,
+      service,
+      status: result === true ? "ready" : "not_ready",
+    };
   } catch {
     return unavailable;
   } finally {

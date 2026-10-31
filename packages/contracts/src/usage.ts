@@ -1,4 +1,12 @@
-import { identifier, integer, member, onlyKeys, record, timestamp, version } from "./validation.js";
+import {
+  identifier,
+  integer,
+  member,
+  onlyKeys,
+  record,
+  timestamp,
+  version,
+} from "./validation.js";
 
 export interface UsageEvent {
   version: 1;
@@ -19,7 +27,21 @@ export interface UsageEvent {
 /** Internal event only: never accept this as an authenticated public billing write. */
 export function parseUsageEvent(value: unknown): UsageEvent {
   const data = record(value);
-  onlyKeys(data, ["version", "eventId", "organizationId", "operationId", "providerRequestId", "occurredAt", "kind", "inputTokens", "outputTokens", "quantity", "estimatedCostMicros", "currency", "priceVersion"]);
+  onlyKeys(data, [
+    "version",
+    "eventId",
+    "organizationId",
+    "operationId",
+    "providerRequestId",
+    "occurredAt",
+    "kind",
+    "inputTokens",
+    "outputTokens",
+    "quantity",
+    "estimatedCostMicros",
+    "currency",
+    "priceVersion",
+  ]);
   return {
     version: version(data.version),
     eventId: identifier(data.eventId),

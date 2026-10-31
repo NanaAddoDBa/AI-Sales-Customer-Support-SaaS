@@ -15,7 +15,10 @@ const patterns = [
 export function secretFindings(filename, content) {
   const result = [];
   const base = path.basename(filename);
-  if ((base === ".env" || base.startsWith(".env.")) && !base.endsWith(".example"))
+  if (
+    (base === ".env" || base.startsWith(".env.")) &&
+    !base.endsWith(".example")
+  )
     result.push("tracked-environment-file");
   for (const [name, expression] of patterns)
     if (expression.test(content)) result.push(name);
@@ -23,20 +26,31 @@ export function secretFindings(filename, content) {
 }
 
 export function checkSecrets() {
-  const tracked = execFileSync("git", ["ls-files", "-z"], { encoding: "utf8" }).split("\0").filter(Boolean);
+  const tracked = execFileSync("git", ["ls-files", "-z"], { encoding: "utf8" })
+    .split("\0")
+    .filter(Boolean);
   const errors = [];
   let inspected = 0;
   let binary = 0;
   for (const filename of tracked) {
     const bytes = fs.readFileSync(filename);
-    if (bytes.includes(0)) { binary++; continue; }
+    if (bytes.includes(0)) {
+      binary++;
+      continue;
+    }
     inspected++;
     for (const rule of secretFindings(filename, bytes.toString("utf8")))
       errors.push(`${filename}: ${rule}`);
   }
-  if (errors.length) throw new Error(`Potential secrets detected (values suppressed):\n${errors.join("\n")}`);
+  if (errors.length)
+    throw new Error(
+      `Potential secrets detected (values suppressed):\n${errors.join("\n")}`,
+    );
   return { inspected, binarySkipped: binary };
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url))
+if (
+  process.argv[1] &&
+  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+)
   console.log("Tracked-text secret scan:", checkSecrets());

@@ -29,8 +29,27 @@ export interface CheckoutLink {
 
 /** All adapters must enforce tenant and customer ownership at the store boundary. */
 export interface CommerceProvider {
-  searchProducts(scope: CommerceScope, query: string, limit: number, signal: AbortSignal): Promise<CurrentProduct[]>;
-  getProduct(scope: CommerceScope, productId: string, signal: AbortSignal): Promise<CurrentProduct | null>;
-  getOrder(scope: VerifiedOrderScope, orderId: string, signal: AbortSignal): Promise<OrderSummary | null>;
-  createCheckout(scope: CommerceScope, productId: string, quantity: number, idempotencyKey: string, signal: AbortSignal): Promise<CheckoutLink>;
+  searchProducts(
+    scope: CommerceScope,
+    query: string,
+    limit: number,
+    signal: AbortSignal,
+  ): Promise<CurrentProduct[]>;
+  getProduct(
+    scope: CommerceScope,
+    productId: string,
+    signal: AbortSignal,
+  ): Promise<CurrentProduct | null>;
+  getOrder(
+    scope: VerifiedOrderScope,
+    orderId: string,
+    signal: AbortSignal,
+  ): Promise<OrderSummary | null>;
+  createCheckout(
+    scope: CommerceScope,
+    productId: string,
+    quantity: number,
+    idempotencyKey: string,
+    signal: AbortSignal,
+  ): Promise<CheckoutLink>;
 }

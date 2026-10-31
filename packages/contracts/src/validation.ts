@@ -39,12 +39,20 @@ export function identifier(value: unknown): string {
 }
 
 export function integer(value: unknown, max = Number.MAX_SAFE_INTEGER): number {
-  if (typeof value !== "number" || !Number.isSafeInteger(value) || value < 0 || value > max)
+  if (
+    typeof value !== "number" ||
+    !Number.isSafeInteger(value) ||
+    value < 0 ||
+    value > max
+  )
     invalid();
   return value;
 }
 
-export function member<T extends string>(value: unknown, allowed: readonly T[]): T {
+export function member<T extends string>(
+  value: unknown,
+  allowed: readonly T[],
+): T {
   if (typeof value !== "string" || !allowed.includes(value as T)) invalid();
   return value as T;
 }
@@ -53,7 +61,8 @@ export function timestamp(value: unknown): string {
   const result = text(value, 24);
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(result)) invalid();
   const date = new Date(result);
-  if (!Number.isFinite(date.getTime()) || date.toISOString() !== result) invalid();
+  if (!Number.isFinite(date.getTime()) || date.toISOString() !== result)
+    invalid();
   return result;
 }
 

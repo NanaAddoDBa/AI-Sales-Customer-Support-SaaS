@@ -1,6 +1,18 @@
-import { identifier, integer, invalid, member, onlyKeys, record, text, version } from "./validation.js";
+import {
+  identifier,
+  integer,
+  invalid,
+  member,
+  onlyKeys,
+  record,
+  text,
+  version,
+} from "./validation.js";
 
-export interface Money { amountMinor: number; currency: string }
+export interface Money {
+  amountMinor: number;
+  currency: string;
+}
 export function parseMoney(value: unknown): Money {
   const data = record(value);
   onlyKeys(data, ["amountMinor", "currency"]);
@@ -20,7 +32,13 @@ export type ToolRequest =
 export function parseToolRequest(value: unknown): ToolRequest {
   const data = record(value);
   version(data.version);
-  const name = member(data.name, ["search_products", "get_product", "get_order", "create_checkout", "request_human"]);
+  const name = member(data.name, [
+    "search_products",
+    "get_product",
+    "get_order",
+    "create_checkout",
+    "request_human",
+  ]);
   switch (name) {
     case "search_products": {
       onlyKeys(data, ["version", "name", "query", "limit"]);
@@ -38,7 +56,12 @@ export function parseToolRequest(value: unknown): ToolRequest {
       onlyKeys(data, ["version", "name", "productId", "quantity"]);
       const quantity = integer(data.quantity, 20);
       if (quantity < 1) invalid();
-      return { version: 1, name, productId: identifier(data.productId), quantity };
+      return {
+        version: 1,
+        name,
+        productId: identifier(data.productId),
+        quantity,
+      };
     }
     case "request_human":
       onlyKeys(data, ["version", "name"]);

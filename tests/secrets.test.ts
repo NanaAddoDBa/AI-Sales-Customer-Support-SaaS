@@ -17,6 +17,8 @@ test("secret scanner detects representative credentials without returning their 
   }
 });
 test("environment values are forbidden while empty example configuration is permitted", () => {
-  assert.deepEqual(secretFindings(".env.production", "PORT=3001"), ["tracked-environment-file"]);
+  assert.deepEqual(secretFindings(".env.production", "PORT=3001"), [
+    "tracked-environment-file",
+  ]);
   assert.deepEqual(secretFindings(".env.example", "MODEL_KEY=\nPORT=3001"), []);
 });

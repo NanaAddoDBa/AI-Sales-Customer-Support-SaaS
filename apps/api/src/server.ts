@@ -1,6 +1,10 @@
 import { randomUUID } from "node:crypto";
 import Fastify from "fastify";
-import { getHealth, getReadiness, type ReadinessProbe } from "@sales-support/backend";
+import {
+  getHealth,
+  getReadiness,
+  type ReadinessProbe,
+} from "@sales-support/backend";
 import { loggerOptions } from "@sales-support/observability";
 import { installSafeErrors } from "./http/errors.js";
 
@@ -29,7 +33,11 @@ export function createServer(options: ServerOptions = {}) {
   installSafeErrors(app);
   app.get("/health", async () => getHealth("api"));
   app.get("/ready", async (_request, reply) => {
-    const readiness = await getReadiness("api", options.readiness, options.readinessTimeoutMs);
+    const readiness = await getReadiness(
+      "api",
+      options.readiness,
+      options.readinessTimeoutMs,
+    );
     return reply.code(readiness.status === "ready" ? 200 : 503).send(readiness);
   });
   return app;

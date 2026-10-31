@@ -1,14 +1,7 @@
 export type ControlState =
-  | "AI_ACTIVE"
-  | "HANDOFF_PENDING"
-  | "HUMAN_ACTIVE"
-  | "RESOLVED";
+  "AI_ACTIVE" | "HANDOFF_PENDING" | "HUMAN_ACTIVE" | "RESOLVED";
 export type ControlAction =
-  | "REQUEST_HANDOFF"
-  | "TAKE_OVER"
-  | "RESOLVE"
-  | "REOPEN"
-  | "RETURN_TO_AI";
+  "REQUEST_HANDOFF" | "TAKE_OVER" | "RESOLVE" | "REOPEN" | "RETURN_TO_AI";
 export interface ConversationControl {
   readonly id: string;
   readonly organizationId: string;

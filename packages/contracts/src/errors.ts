@@ -1,4 +1,11 @@
-import { identifier, member, onlyKeys, record, text, version } from "./validation.js";
+import {
+  identifier,
+  member,
+  onlyKeys,
+  record,
+  text,
+  version,
+} from "./validation.js";
 
 export const ERROR_MESSAGES = {
   INVALID_REQUEST: "The request is invalid.",
@@ -23,10 +30,17 @@ export function parseApiError(value: unknown): ApiErrorEnvelope {
   onlyKeys(data, ["version", "error"]);
   const error = record(data.error);
   onlyKeys(error, ["code", "message", "requestId"]);
-  const code = member(error.code, Object.keys(ERROR_MESSAGES) as ApiErrorCode[]);
+  const code = member(
+    error.code,
+    Object.keys(ERROR_MESSAGES) as ApiErrorCode[],
+  );
   text(error.message, 1000);
   return {
     version: version(data.version),
-    error: { code, message: ERROR_MESSAGES[code], requestId: identifier(error.requestId) },
+    error: {
+      code,
+      message: ERROR_MESSAGES[code],
+      requestId: identifier(error.requestId),
+    },
   };
 }
