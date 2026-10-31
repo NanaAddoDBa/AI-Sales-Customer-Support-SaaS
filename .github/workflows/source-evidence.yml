@@ -1,0 +1,34 @@
+name: Source evidence
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: source-evidence-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Export tracked source and history only
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/source-evidence"
+          git archive --format=zip --output="$RUNNER_TEMP/source-evidence/source.zip" HEAD
+          git bundle create "$RUNNER_TEMP/source-evidence/repository.bundle" HEAD
+          git bundle verify "$RUNNER_TEMP/source-evidence/repository.bundle"
+          git rev-parse HEAD > "$RUNNER_TEMP/source-evidence/COMMIT.txt"
+          cd "$RUNNER_TEMP/source-evidence"
+          sha256sum source.zip repository.bundle > SHA256SUMS.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: source-evidence-${{ github.sha }}
+          path: ${{ runner.temp }}/source-evidence/
+          if-no-files-found: error
+          retention-days: 14
