@@ -1,4 +1,4 @@
-export { getHealth } from "./modules/health/index.js";
+export { getHealth, getReadiness, type ReadinessProbe } from "./modules/health/index.js";
 export {
   transitionControl,
   canDeliverAssistant,
