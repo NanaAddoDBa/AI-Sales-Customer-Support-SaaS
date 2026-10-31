@@ -34,7 +34,6 @@ export const loggerOptions = {
     req(value: unknown) {
       const request = object(value);
       const method = typeof request.method === "string" && /^(GET|POST|PUT|PATCH|DELETE|HEAD|OPTIONS)$/.test(request.method) ? request.method : "UNKNOWN";
-      // URLs, query strings, IPs, headers and bodies are deliberately omitted.
       return { method };
     },
     res(value: unknown) {
@@ -43,7 +42,13 @@ export const loggerOptions = {
     },
     err(value: unknown) {
       const code = object(value).code;
-      return { type: "Error", code: typeof code === "string" && knownCodes.has(code) ? code : "INTERNAL_ERROR" };
+      // Fastify requires these fields; neither contains the original error.
+      return {
+        type: "Error",
+        message: "An operation failed.",
+        stack: "",
+        code: typeof code === "string" && knownCodes.has(code) ? code : "INTERNAL_ERROR",
+      };
     },
   },
 };

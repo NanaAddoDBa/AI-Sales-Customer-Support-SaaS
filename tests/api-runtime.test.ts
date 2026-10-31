@@ -4,7 +4,7 @@ import { createServer } from "../apps/api/src/server.js";
 import { sendMessageJsonSchema } from "../packages/contracts/src/index.js";
 import { loggerOptions, safeTelemetry } from "../packages/observability/src/index.js";
 
- test("API generates correlation IDs and reports unavailable dependencies honestly", async () => {
+test("API generates correlation IDs and reports unavailable dependencies honestly", async () => {
   const app = createServer({ logging: false });
   try {
     const response = await app.inject({ url: "/health", headers: { "x-request-id": "forged" } });
@@ -33,7 +33,6 @@ test("dependency readiness handles success, failures and bounded timeout", async
 });
 test("API schemas reject spoofed fields, malformed JSON and oversize requests", async () => {
   const app = createServer({ logging: false });
-  // Test-only route: not registered in the production composition root.
   app.post("/contract-test", { schema: { body: sendMessageJsonSchema } }, async () => ({ accepted: true }));
   app.get("/failure-test", async () => { throw new Error("private-secret-stack"); });
   try {
@@ -53,5 +52,8 @@ test("telemetry and log serializers exclude secrets and private payloads", () =>
   const unsafe = { requestId: "r1", organizationId: "t1", password: "secret", body: "private transcript", email: "person@example.invalid", url: "/?token=secret", method: "POST", durationMs: 12 };
   assert.deepEqual(safeTelemetry(unsafe), { requestId: "r1", organizationId: "t1", durationMs: 12 });
   assert.deepEqual(loggerOptions.serializers.req(unsafe), { method: "POST" });
-  assert.deepEqual(loggerOptions.serializers.err(new Error("secret")), { type: "Error", code: "INTERNAL_ERROR" });
+  const error = loggerOptions.serializers.err(new Error("private-secret-stack"));
+  assert.equal(error.code, "INTERNAL_ERROR");
+  assert.equal(error.stack, "");
+  assert.ok(!JSON.stringify(error).includes("private-secret-stack"));
 });
