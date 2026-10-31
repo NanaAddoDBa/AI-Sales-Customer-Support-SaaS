@@ -12,7 +12,15 @@ export function installSafeErrors(app: FastifyInstance): void {
     });
   });
   app.setErrorHandler((error, request, reply) => {
-    const status = error.validation ? 400 : error.statusCode;
+    const details =
+      error && typeof error === "object"
+        ? (error as { validation?: unknown; statusCode?: unknown })
+        : {};
+    const status = Array.isArray(details.validation)
+      ? 400
+      : typeof details.statusCode === "number"
+        ? details.statusCode
+        : undefined;
     const allowed: Record<number, [string, string]> = {
       400: ["INVALID_REQUEST", "The request is invalid."],
       401: ["UNAUTHENTICATED", "Authentication is required."],
