@@ -5,15 +5,21 @@
 Implement a production-capable multi-tenant sales/support SaaS through real source,
 tests, modular commits and authorized deployment. Do not substitute another plan,
 mock dashboard, code snippets or a fabricated success report for implementation.
-Read `CODEX_START.md` once, then `PROGRESS.md`, `TASKS.json`,
-`docs/handoff/CURRENT_STATE.md` and the applicable execution phase. Read only the
-relevant specification sections each time; do not repeatedly ingest all archives.
+Read `MVP.md` first for the frozen website-first paid-pilot release scope and
+M0-M5 completion gates. Then read `PROGRESS.md`, `TASKS.json` and the relevant
+existing implementation/specification sections. The original blueprint and broad
+checklists remain the roadmap, not a requirement to finish every D1-D3 task before
+shipping. MVP scope never overrides security, authorization or evidence controls.
+Read `CODEX_START.md` once for historical handoff context; do not restart the
+foundation or authentication when real accepted implementation already exists.
 
 Target checkout: `C:\Users\nanaa\Desktop\Studies\Self_Studies\Codes\Projects\AI Sales & Customer Support SaaS`
 Target origin: `https://github.com/NanaAddoDBa/AI-Sales-Customer-Support-SaaS.git`
 
-This handoff starts with specifications only. Re-inspect the real checkout: later
-work may exist. Old claims about built features/passing tests are not evidence.
+The original handoff started with specifications only. Re-inspect the real checkout:
+newer identity and D1-D3 branches now exist and must be reconciled without losing
+work. The MVP implementation line starts from identity; see MVP.md for inspected
+refs and the next gate. Old claims about built features/passing tests are not evidence.
 
 ## Scope and authorization
 
@@ -67,8 +73,11 @@ and worker roles as well as RLS; privileged DB credentials must not leak to clie
 Customers and retrieved content are untrusted. Validate tool parameters and
 authorize each call in code. No arbitrary SQL/shell/general credential-bearing
 tools for the production customer agent. Use live commerce tools for prices,
-stock and private orders. Verify customer ownership before private order access.
-Refunds, cancellations, discounts and configured sensitive actions need approval.
+stock and private orders when those deferred integrations are implemented. The MVP
+curated directory must not claim live commerce data; unsupported/private order
+requests escalate. Verify customer ownership before any future private order access.
+Refunds, cancellations, discounts and configured sensitive actions need approval;
+none is an enabled MVP agent action.
 
 Use durable jobs, signed webhooks, deduplication, safe retries and reconciliation.
 A provider timeout can occur after a side effect: do not blindly repeat charges,
@@ -110,19 +119,24 @@ Keep source existence, verification, publishing, staging and production as separ
 states in `TASKS.json`. Record real commands, exit status, environment, results,
 artifacts and commit SHA in `docs/evidence/`; use `EVIDENCE_TEMPLATE.md`.
 
-Critical gates: real-DB tenant/role isolation; auth; webhook replay; verified order
-access; in-flight takeover; billing/caps; prompt injection/grounding; browser
-journeys; backup/object restore; deployment/rollback. Focus tests during development
-but do not remove gates to obtain a green check. Never report skipped tests as passed.
-Use snapshots/mocks where useful, but require real-service tests for launch claims.
-Provider/model/prompt changes run the versioned evaluation set.
+Critical gates for enabled capabilities: real-DB tenant/role isolation; auth;
+webhook replay; in-flight takeover; billing/caps; prompt injection/grounding;
+browser journeys; backup/object restore; deployment/rollback. Verified private
+order access becomes mandatory before that deferred integration is enabled.
+Focus tests during development but do not remove gates to obtain a green check.
+Never report skipped tests as passed. Use snapshots/mocks where useful, but require
+real-service tests for launch claims. Provider/model/prompt changes run the versioned
+evaluation set.
 
 ## Efficient continuation
 
-Follow `docs/handoff/EXECUTION_PLAN.md`. Finish a vertical slice before creating
-many disconnected placeholder features. Start implementing after the initial brief
-inspection; do not spend the whole task re-planning. Continue sequentially while
-resources/access permit. At a session boundary update `PROGRESS.md` with exact next
-steps, dirty changes, failing tests and external blockers, not promises.
+Follow the ordered M0-M5 gates in `MVP.md`; use `docs/handoff/EXECUTION_PLAN.md`
+only for still-applicable implementation detail. Finish a vertical slice before
+creating many disconnected placeholder features. Start implementing after the
+initial brief inspection; do not spend the whole task re-planning. Continue
+sequentially while resources/access permit. At a session boundary update
+`PROGRESS.md` with the current MVP gate, exact next steps, dirty changes, failing
+tests and external blockers, not promises. Preserve existing task evidence and
+historical requirement IDs; do not mark deferred roadmap items complete.
 When blocked, record the precise missing prerequisite, complete unrelated safe work,
 and request only the owner action needed to unblock that prerequisite.
